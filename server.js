@@ -3,6 +3,9 @@ const express = require('express');
 const app = express();
 const port = 8000;
 
+app.use( express.json());
+app.use( express.urlencoded({ extended: true }) );
+
 //initializes express server to listen on port 8000 and send a message as soon as the server is ready
 const server = app.listen(8000, () => {
     console.log('The Server is all fired up on port 8000')

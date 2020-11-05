@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 import './App.css';
+import Chat from './components/chat/chat';
+import Welcome from './components/welcome/welcome';
+import Header from './components/header/header';
  
 function App() {
   // notice that we pass a callback function to initialize the socket
@@ -21,7 +24,9 @@ function App() {
  
   return (
     <div className="App">
-      <h1>Socket Test</h1>
+      <Header/>
+      <Welcome/>
+      <Chat/>
     </div>
   );
 }
