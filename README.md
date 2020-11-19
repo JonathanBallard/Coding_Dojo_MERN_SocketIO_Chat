@@ -18,3 +18,6 @@
 - Add styling to welcome screen
 - Test messages actually sent through server
 - Organize messages by time sent
+- Broadcast toast when user enters chat
+- Change message background based on whether or not you are the message sender
+- Need way to enter and submit new messages
