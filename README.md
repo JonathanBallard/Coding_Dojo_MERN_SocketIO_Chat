@@ -9,3 +9,12 @@
 - Ensure the newest message is always on screen: keep chat messages scrolled to bottom (bonus)
 - Upon joining chat room, new user should be able to see previous messages (bonus)
 - Create different chat rooms that users can join where they only interact with others in their room (bonus)
+
+
+
+- Hide messages until name chosen
+- Hide My Name... entry once name is chosen
+- Add styling to messages
+- Add styling to welcome screen
+- Test messages actually sent through server
+- Organize messages by time sent
