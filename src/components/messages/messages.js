@@ -22,7 +22,13 @@ const Messages = props => {
 
     //normal messages
     for(var i in messages){
-        messageArr.push(<Message key={ i } sender='' timesent='' content={messages[i]} ></Message>)
+        const d = new Date();
+        const currHours = d.getHours();
+        const currMinutes = d.getMinutes();
+        const currSeconds = d.getSeconds();
+        const timeString = '' + currHours + ':' + currMinutes + ':' + currSeconds; 
+
+        messageArr.push(<Message key={ i } sender='' timesent={ timeString } content={ messages[i] } ></Message>)
     }
 
     //test messages
