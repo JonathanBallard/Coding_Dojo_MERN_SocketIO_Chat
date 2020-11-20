@@ -20,4 +20,6 @@
 - Organize messages by time sent
 - Broadcast toast when user enters chat
 - Change message background based on whether or not you are the message sender
+- Upon user speaking change, messages will appear on opposite side (?)
 - Need way to enter and submit new messages
+

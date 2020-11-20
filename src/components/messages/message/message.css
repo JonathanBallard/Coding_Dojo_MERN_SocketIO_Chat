@@ -1,5 +1,6 @@
 
 .msgContent {
+    padding: 10px;
     font-size: 15px;
     font-weight: bold;
     color: red;
@@ -9,21 +10,28 @@
 }
 
 .msgMetadata {
-    font-size: 9px;
+    font-size: 11px;
     color: grey;
     padding-top: 0px;
     margin-top: 0px;
 }
 
 .message {
-    padding-top: 10px;
-    width: 50%;
-    height: 50px;
-    text-align: left;
-    padding-left: 15px;
-    margin-left: 25%;
+    width: auto;
+    height: auto;
+    margin: auto;
     margin-top: 10px;
     margin-bottom: 5px;
     padding: 5px;
     border: 1px solid black;
+}
+
+.alignLeft {
+    text-align: left;
+    margin-right: 150px;
+}
+
+.alignRight {
+    text-align: right;
+    margin-left: 150px;
 }
