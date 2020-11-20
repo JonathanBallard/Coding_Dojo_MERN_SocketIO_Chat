@@ -24,14 +24,24 @@
     margin-bottom: 5px;
     padding: 5px;
     border: 1px solid black;
+    background-color: azure;
 }
 
 .alignLeft {
     text-align: left;
-    margin-right: 150px;
+    margin-right: 55%;
 }
 
 .alignRight {
     text-align: right;
-    margin-left: 150px;
+    margin-left: 55%;
 }
+
+.userColor {
+    background-color: green;
+}
+
+.otherColor {
+    background-color: azure;
+}
+
