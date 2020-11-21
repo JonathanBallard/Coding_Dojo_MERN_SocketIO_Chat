@@ -20,6 +20,7 @@
 - Organize messages by time sent
 - Broadcast toast when user enters chat
 - Change message background based on whether or not you are the message sender
-- Upon user speaking change, messages will appear on opposite side (?)
+- User's messages will show on right side, others will show on left side
+- Change messages background color based on user?
 - Need way to enter and submit new messages
 
