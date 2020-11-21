@@ -4,7 +4,7 @@ import './message.css'
 const Message = props => {
 
 
-    if(props.align != 'alignRight'){
+    if(props.align !== 'alignRight'){
 
         return (
             <div className="message alignLeft">

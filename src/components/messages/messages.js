@@ -36,9 +36,9 @@ const Messages = props => {
     }
 
     //test messages
-    messageArr.push(<Message key={ (messageArr.length()) } align='alignLeft' sender='jonathan' timesent='12:26:04' content="Hello Chat" />);
-    messageArr.push(<Message key={ (messageArr.length()) } align='alignLeft' sender='jonathan' timesent='12:27:44' content="Message 2" />);
-    messageArr.push(<Message key={ (messageArr.length()) } align='alignRight' sender='Excalibur' timesent='12:22:54' content="Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo." />);
+    messageArr.push(<Message key={ (messageArr.length) } align='alignLeft' sender='jonathan' timesent='12:26:04' content="Hello Chat" />);
+    messageArr.push(<Message key={ (messageArr.length) } align='alignLeft' sender='jonathan' timesent='12:27:44' content="Message 2" />);
+    messageArr.push(<Message key={ (messageArr.length) } align='alignRight' sender='Excalibur' timesent='12:22:54' content="Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo." />);
 
     return (
         <div className='allMessages'>
