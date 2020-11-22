@@ -1,7 +1,17 @@
 
 
+.chat {
+    border: 4px solid black;
+    width: 85%;
+    height: auto;
+    background-color: lightslategrey;
+    margin: auto;
+    margin-top: 20px;
+}
 
-
+.hidden {
+    display: none;
+}
 
 
 

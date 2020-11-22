@@ -21,4 +21,4 @@
 - User's messages will show on right side, others will show on left side
 - Change messages background color based on user?
 - Need way to enter and submit new messages
-
+- Need to prevent React from losing the 'hidden' class for the username entry upon reloading
