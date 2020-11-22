@@ -10,8 +10,6 @@
 - Upon joining chat room, new user should be able to see previous messages (bonus)
 - Create different chat rooms that users can join where they only interact with others in their room (bonus)
 
-
-
 - Hide messages until name chosen
 - Hide My Name... entry once name is chosen
 - **DONE** Add styling to messages

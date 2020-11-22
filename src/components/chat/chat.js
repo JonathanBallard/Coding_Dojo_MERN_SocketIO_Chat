@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 
 import Messages from '../messages/messages';
 import './chat.css'
