@@ -13,7 +13,7 @@ const Speak = props => {
     const sendMessageHandler = () => {
         const io = require('socket.io-client');
         const socket = io('http://localhost:8000');
-        socket.emit('outgoing_message', messageToSend);
+        socket.emit('message', messageToSend);
     }
     
     return (

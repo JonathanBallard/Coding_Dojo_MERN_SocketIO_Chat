@@ -30,7 +30,7 @@ io.on('connection', socket => {
         const userToast = 'Welcome new user: ' + data;
         socket.broadcast.emit("send_data_to_all_other_clients", userToast)
     })
-    socket.on('outgoing_message', (data) => {
+    socket.on('message', (data) => {
         console.log("THIS IS THE OUTGOING MESSAGE TEST")
 
         //rather than simply emitting here, we want to send data into a <Message> format
