@@ -23,3 +23,12 @@
 - Need to prevent React from losing the 'hidden' class for the username entry upon reloading
 - Need way to enter and submit new messages
 - Emit the 'messageToSend' from Speak.js
+
+- **FLOWCHART**
+- User chooses username on client, sends username to server
+- Server toasts username
+- Client hides <Welcome> and shows <Chat>
+- User sends message through client and <Chat> to server
+- Server emits message
+- Client receives message from server through <Messages>, turns the message into a <Message>
+- Client renders <Messages>

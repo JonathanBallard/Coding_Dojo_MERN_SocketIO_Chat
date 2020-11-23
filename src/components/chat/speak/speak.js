@@ -18,7 +18,7 @@ const Speak = props => {
         <div className='speak'>
             <h4>Enter Message:</h4>
             <form>
-                <input onChange= { updateMessageHandler } name='sendMsg' type='text' placeholder='My Message' />
+                <input onChange= { updateMessageHandler } name='sendMsg' type='text' placeholder='My Message...' />
                 <input className='submitBtn' onClick={ sendMessageHandler } type="submit" value="Send"/>
             </form>
 
