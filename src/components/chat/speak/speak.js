@@ -11,7 +11,9 @@ const Speak = props => {
 
     //add our messageToSend to go through io.emit or similar
     const sendMessageHandler = () => {
-
+        const io = require('socket.io-client');
+        const socket = io('http://localhost:8000');
+        socket.emit('outgoing_message', messageToSend);
     }
     
     return (
