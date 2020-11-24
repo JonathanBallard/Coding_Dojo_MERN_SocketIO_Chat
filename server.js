@@ -21,20 +21,25 @@ const io = require("socket.io")(server);
 io.on('connection', socket => {
     console.log('Nice to meet you: Socket ID:', socket.id, ' **handshake**');
     socket.emit("Welcome", 'testing')
-    socket.on('event_from_client', data => {
-        socket.broadcast.emit("send_data_to_all_other_clients", data);
+    socket.on('toastOut', data => {
+        console.log('toastDAta: ' + data)
+        socket.emit("toast", data);
     });
 
     socket.on('toast', (data) => {
         console.log("THIS IS THE TOAST TEST")
         const userToast = 'Welcome new user: ' + data;
-        socket.broadcast.emit("send_data_to_all_other_clients", userToast)
+        socket.emit("send_data_to_all_other_clients", userToast)
     })
     socket.on('message', (data) => {
         console.log("THIS IS THE OUTGOING MESSAGE TEST")
 
         //rather than simply emitting here, we want to send data into a <Message> format
-        socket.broadcast.emit("send_data_to_all_other_clients", data)
+        socket.emit("send_data_to_all_other_clients", data)
+    })
+
+    socket.on("disconnect", () => {
+        console.log('Client Disconnected');
     })
 
 });

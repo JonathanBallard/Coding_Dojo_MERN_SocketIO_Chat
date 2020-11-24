@@ -12,12 +12,20 @@ const Welcome = props => {
 
 
 
-    let [ username, setUsername ] = useState('anonymous');
-
-    let [ welcomeStyling, setWelcomeStyling ] = useState('welcome');
+    const [ username, setUsername ] = useState("");
+    const [ toast, setToast ] = useState("");
+    const [ welcomeStyling, setWelcomeStyling ] = useState("");
 
     useEffect(() => {
+        setUsername('anonymous');
+        setWelcomeStyling('welcome');
+        props.socket.on('toast', data => {
+            setToast(data);
+        })
+    }, [])
 
+
+    useEffect(() => {
         if(props.hidden){
             setWelcomeStyling('welcome hidden');
         }
@@ -41,6 +49,7 @@ const Welcome = props => {
                 <input onChange={ setName } name="username" type="text" placeholder={ username } />
                 <input onClick={ sendUsername } className="submitBtn" type="submit" value="Start Chatting"/>
             </form>
+            <h2>{ toast }</h2>
         </div>
     )
 }
