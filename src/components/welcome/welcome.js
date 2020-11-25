@@ -5,17 +5,9 @@ import './welcome.css';
 const Welcome = props => {
 
     const [ username, setUsername ] = useState("");
-    const [ toast, setToast ] = useState("");
+
     const [ welcomeStyling, setWelcomeStyling ] = useState("");
 
-    useEffect(() => {
-        setUsername('anonymous');
-        setWelcomeStyling('welcome');
-        props.socket.on('toast', data => {
-            setToast(data);
-            console.log(toast);
-        })
-    }, [])
 
 
     useEffect(() => {
@@ -42,7 +34,7 @@ const Welcome = props => {
                 <input onChange={ setName } name="username" type="text" placeholder={ username } />
                 <input onClick={ sendUsername } className="submitBtn" type="submit" value="Start Chatting"/>
             </form>
-            <h2>{ toast }</h2>
+
         </div>
     )
 }

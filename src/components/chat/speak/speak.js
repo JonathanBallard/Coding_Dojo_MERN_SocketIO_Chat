@@ -12,7 +12,7 @@ const Speak = props => {
     //add our messageToSend to go through io.emit or similar
     const sendMessageHandler = () => {
         console.log('message sending');
-        props.socket.emit('message', messageToSend);
+        props.socket.emit('outgoing_message', messageToSend,);
     }
     
     return (

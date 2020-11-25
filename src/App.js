@@ -28,7 +28,6 @@ function App() {
     }, []);
 
     const sendToast = (name) => {
-
         //emit name for the server to toast
         socket.emit('toastOut', name);
     }
@@ -36,6 +35,7 @@ function App() {
     const openChatHandler = (username) => {
         setHideChat(false);
         //toast username
+        console.log('activated openChatHandler with name: ' + username)
         sendToast(username);
     }
 

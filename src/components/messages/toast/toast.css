@@ -1,0 +1,22 @@
+.toast {
+    padding: 10px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    padding-bottom: 0px;
+}
+
+.toastBody {
+    font-size: 9px;
+    color: grey;
+    padding-top: 0px;
+    margin-top: 0px;
+}
+
+.sender {
+    font-size: 11px;
+    font-weight: bold;
+    color: grey;
+    padding-top: 0px;
+    margin-top: 0px;
+    
+}
