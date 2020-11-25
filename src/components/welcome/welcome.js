@@ -3,14 +3,6 @@ import './welcome.css';
 
 
 const Welcome = props => {
-    
-
-    // useEffect( () => {
-    //     const io = require('socket.io-client');
-    //     const socket = io('http://localhost:8000');
-    // }, [])
-
-
 
     const [ username, setUsername ] = useState("");
     const [ toast, setToast ] = useState("");
@@ -21,6 +13,7 @@ const Welcome = props => {
         setWelcomeStyling('welcome');
         props.socket.on('toast', data => {
             setToast(data);
+            console.log(toast);
         })
     }, [])
 

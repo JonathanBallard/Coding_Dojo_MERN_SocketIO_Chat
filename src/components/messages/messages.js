@@ -32,7 +32,7 @@ const Messages = props => {
 
         // add in some logic checking if this message was sent by our user (to change background color)
 
-            messageArr.push(<Message key={ i } sender='' timesent={ timeString } content={ messages[i] } ></Message>)
+            messageArr.push(<Message socket={ props.socket } key={ i } sender='' timesent={ timeString } content={ messages[i] } ></Message>)
     }
 
     //test messages

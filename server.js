@@ -21,8 +21,9 @@ const io = require("socket.io")(server);
 io.on('connection', socket => {
     console.log('Nice to meet you: Socket ID:', socket.id, ' **handshake**');
     socket.emit("Welcome", 'testing')
+
     socket.on('toastOut', data => {
-        console.log('toastDAta: ' + data)
+        console.log('toastData: ' + data)
         socket.emit("toast", data);
     });
 

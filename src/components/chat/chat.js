@@ -10,7 +10,6 @@ const Chat = props => {
     let [chatClasses, setChatClasses] = useState('chat hidden');
 
     useEffect(() =>{
-
         if(props.hidden !== true){
             setChatClasses('chat');
         }
@@ -21,8 +20,8 @@ const Chat = props => {
 
     return (
         <div className={ chatClasses }>
-            <Messages />
-            <Speak />
+            <Messages socket={ props.socket } />
+            <Speak socket={ props.socket } />
         </div>
     )
 }
