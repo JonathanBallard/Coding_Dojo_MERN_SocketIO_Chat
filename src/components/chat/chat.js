@@ -7,7 +7,8 @@ import './chat.css'
 const Chat = props => {
     
 
-    let [chatClasses, setChatClasses] = useState('chat hidden');
+    const [chatClasses, setChatClasses] = useState('chat hidden');
+    const [ username, setUsername ] = useState();
 
     useEffect(() =>{
         if(props.hidden !== true){
@@ -16,10 +17,17 @@ const Chat = props => {
         else {
             setChatClasses('chat hidden')
         }
-    },[props.hidden])
+
+        if(props.username){
+            setUsername(props.username);
+        }
+    },[props.hidden, props.username]);
+
+
 
     return (
         <div className={ chatClasses }>
+            <h1>Chatting As: { username }</h1>
             <Messages socket={ props.socket } />
             <Speak socket={ props.socket } />
         </div>

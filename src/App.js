@@ -11,6 +11,7 @@ function App() {
 
     const [ socket ] = useState(() => io(':8000'));
     const [ hideChat, setHideChat ] = useState();
+    const [ username, setUsername ] = useState();
 
     useEffect(() => {
         setHideChat(true);
@@ -25,6 +26,7 @@ function App() {
         // this ensures that the underlying socket will be closed if App is unmounted
         // this would be more critical if we were creating the socket in a subcomponent
         // return () => socket.disconnect(true);
+        setUsername(username);
     }, []);
 
     const sendToast = (name) => {
@@ -37,6 +39,7 @@ function App() {
         //toast username
         console.log('activated openChatHandler in App.js with name: ' + username)
         sendToast(username);
+        setUsername(username);
     }
 
 
@@ -53,7 +56,7 @@ function App() {
         <div className="App">
             <Header />
             <Welcome socket={ socket } usernameSubmitHandler={ openChatHandler } hidden={ false } />
-            <Chat socket={ socket } hidden={ false } />
+            <Chat username={ username } socket={ socket } hidden={ false } />
         </div>
     );
 }

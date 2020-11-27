@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import io from 'socket.io-client';
+
 import Message from "./message/message";
 import Toast from './toast/toast';
 import './messages.css'
@@ -25,10 +25,10 @@ const Messages = props => {
         // add logic to check if message is a toast or not
 
         if(type === 'message'){
-            setMessageArr(...messageArr, <Message socket={ props.socket } key={ messageArr.length } sender={ sender } timesent={ timeString } content={ msg } />)
+        setMessageArr([...messageArr, <Message socket={ props.socket } key={ messageArr.length } sender={ sender } timesent={ timeString } content={ msg } />])
         }
         else if(type === 'toast'){
-            setMessageArr(...messageArr, <Toast socket={ props.socket } key={ messageArr.length } sender={ sender } timesent={ timeString } content={ msg } />)
+        setMessageArr([...messageArr, <Toast socket={ props.socket } key={ messageArr.length } sender={ sender } timesent={ timeString } content={ msg } />])
         }
     };
     
