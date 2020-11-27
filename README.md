@@ -20,11 +20,13 @@
 - Change message background based on whether or not you are the message sender
 - User's messages will show on right side, others will show on left side
 - Change messages background color based on user?
-- Need to prevent React from losing the 'hidden' class for the username entry upon reloading
+- **DONE** Need to prevent React from losing the 'hidden' class for the username entry upon reloading
 - **DONE** Emit the 'messageToSend' from Speak.js
 - Fix username not being passed down through props properly
-- Only 1 message being shown at a time currently
+- **DONE** Only 1 message being shown at a time currently
+- Keep scrolled to bottom
 - Style it up buttercup
+- Increase the size of the message entry box
 
 - **FLOWCHART**
 - User chooses username on client, sends username to server

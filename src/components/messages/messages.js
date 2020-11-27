@@ -16,6 +16,9 @@ const Messages = props => {
         const currSeconds = d.getSeconds();
         const timeString = '' + currHours + ':' + currMinutes + ':' + currSeconds; 
 
+        const currentArrLength = messageArr.length;
+        
+
         // add in some logic here checking if this message is sent by the same user as the last message
 
         // add in some logic checking if this message was sent by our user (to change background color)
@@ -24,15 +27,27 @@ const Messages = props => {
 
         if(type === 'message'){
             console.log('messages, props.username: ' + props.username + ' , sender: ' + sender);
+            // if(props.username !== sender){
+            //     setMessageArr([...messageArr, <Message socket={ props.socket } align='alignRight' index={ currentArrLength } key={ currentArrLength } sender={ sender } timesent={ timeString } content={ msg } />])
+            // }
+            // else {
+            //     setMessageArr([...messageArr, <Message socket={ props.socket } align='alignLeft' index={ currentArrLength } key={ currentArrLength } sender={ sender } timesent={ timeString } content={ msg } />])
+            // }
+
+            let newMsg = <Message socket={ props.socket } align='alignRight' index={ currentArrLength } key={ currentArrLength } sender={ sender } timesent={ timeString } content={ msg } />;
+
             if(props.username !== sender){
-                setMessageArr([...messageArr, <Message socket={ props.socket } align='alignRight' key={ messageArr.length } sender={ sender } timesent={ timeString } content={ msg } />])
+                newMsg = <Message socket={ props.socket } align='alignRight' index={ currentArrLength } key={ currentArrLength } sender={ sender } timesent={ timeString } content={ msg } />;
             }
             else {
-                setMessageArr([...messageArr, <Message socket={ props.socket } align='alignLeft' key={ messageArr.length } sender={ sender } timesent={ timeString } content={ msg } />])
+                newMsg = <Message socket={ props.socket } align='alignLeft' index={ currentArrLength } key={ currentArrLength } sender={ sender } timesent={ timeString } content={ msg } />;
             }
+
+            setMessageArr([messageArr.concat(newMsg)])
+
         }
         else if(type === 'toast'){
-            setMessageArr([...messageArr, <Toast socket={ props.socket } key={ messageArr.length } sender={ sender } timesent={ timeString } content={ msg } />])
+            setMessageArr([...messageArr, <Toast socket={ props.socket } index={ currentArrLength } key={ currentArrLength } sender={ sender } timesent={ timeString } content={ msg } />])
         }
     };
     
@@ -49,7 +64,7 @@ const Messages = props => {
             createMessage('message', msg, sender);
         });
         
-    }, []);
+    });
 
 
     //test messages
@@ -60,6 +75,7 @@ const Messages = props => {
     return (
         <div className='allMessages'>
             { messageArr }
+            <h5>{ messageArr.length }</h5>
         </div>
     )
 }
