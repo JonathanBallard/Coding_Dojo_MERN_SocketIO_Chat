@@ -19,8 +19,9 @@ const Welcome = props => {
         }
     }, [props.hidden])
 
-    const setName = (name) => {
-        setUsername(name);
+    const setName = (e) => {
+        setUsername(e.target.value);
+        console.log('welcome setUsername: ' + username);
     }
     const sendUsername = () => {
         props.usernameSubmitHandler(username);
@@ -31,7 +32,7 @@ const Welcome = props => {
             <h4>Get started right now!</h4>
             <h6>I want to start chatting with the name...</h6>
             <form action=''>
-                <input onChange={ setName } name="username" type="text" placeholder={ username } />
+                <input id='name' onChange={ setName } name="username" type="text" placeholder={ username } />
                 <input onClick={ sendUsername } className="submitBtn" type="submit" value="Start Chatting"/>
             </form>
 

@@ -35,7 +35,7 @@ function App() {
     const openChatHandler = (username) => {
         setHideChat(false);
         //toast username
-        console.log('activated openChatHandler with name: ' + username)
+        console.log('activated openChatHandler in App.js with name: ' + username)
         sendToast(username);
     }
 

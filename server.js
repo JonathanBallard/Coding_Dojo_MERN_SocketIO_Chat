@@ -28,14 +28,14 @@ io.on('connection', socket => {
 
     socket.on('toastOut', sender => {
         console.log('toastData: ' + sender)
-        socket.emit("toast", 'has joined the chat!', sender);
+        // socket.emit("toast", 'has joined the chat!', sender);
     });
 
-    socket.on('toast', (data) => {
-        console.log("THIS IS THE TOAST TEST")
-        const userToast = 'Welcome new user: ' + data;
-        socket.emit("send_data_to_all_other_clients", userToast)
-    })
+    // socket.on('toast', (data) => {
+    //     console.log("THIS IS THE TOAST TEST")
+    //     const userToast = 'Welcome new user: ' + data;
+    //     socket.emit("send_data_to_all_other_clients", userToast)
+    // })
     socket.on('outgoing_message', (msg, sender) => {
         console.log("THIS IS THE OUTGOING MESSAGE TEST")
         socket.emit("new_message_from_server", msg, sender);
