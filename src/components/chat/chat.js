@@ -28,8 +28,8 @@ const Chat = props => {
     return (
         <div className={ chatClasses }>
             <h1>Chatting As: { username }</h1>
-            <Messages socket={ props.socket } />
-            <Speak socket={ props.socket } />
+            <Messages username={ props.username } socket={ props.socket } />
+            <Speak username={ props.username } socket={ props.socket } />
         </div>
     )
 }

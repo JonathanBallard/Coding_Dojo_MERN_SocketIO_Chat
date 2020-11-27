@@ -6,9 +6,7 @@ import './messages.css'
 
 const Messages = props => {
     
-    const [messages, setMessages] = useState([]);
     const [messageArr, setMessageArr] = useState([]);
-    const [ toastName, setToastName ] = useState();
 
 
     const createMessage= (type, msg, sender) =>{
@@ -36,16 +34,12 @@ const Messages = props => {
 
         //receive toasted name
         props.socket.on('toast', (msg, sender) => {
-            setToastName(sender);
             console.log('toast name received on messages: ' + sender);
             createMessage('toast', msg, sender)
         });
 
         props.socket.on("new_message_from_server", (msg, sender) => {
-            setMessages(prevMessages => {
-                return [msg, ...prevMessages];
-            })
-
+            console.log('message received on messages: ' + msg);
             createMessage('message', msg, sender);
         });
         

@@ -22,9 +22,11 @@ const Welcome = props => {
     const setName = (e) => {
         setUsername(e.target.value);
         console.log('welcome setUsername: ' + username);
+        
     }
-    const sendUsername = () => {
+    const sendUsername = (e) => {
         props.usernameSubmitHandler(username);
+        e.preventDefault();
     }
 
     return (
