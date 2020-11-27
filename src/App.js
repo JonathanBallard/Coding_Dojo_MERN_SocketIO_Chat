@@ -20,13 +20,12 @@ function App() {
         // in the useEffect callback function
         console.log('Is this running?');
         socket.on('Welcome', data => console.log(data));
-        socket.emit('toastOut', 'toastDataHere');
 
         // note that we're returning a callback function
         // this ensures that the underlying socket will be closed if App is unmounted
         // this would be more critical if we were creating the socket in a subcomponent
         // return () => socket.disconnect(true);
-        setUsername(username);
+        // setUsername(username);
     }, []);
 
     const sendToast = (name) => {
@@ -34,12 +33,12 @@ function App() {
         socket.emit('toastOut', name);
     }
 
-    const openChatHandler = (username) => {
+    const openChatHandler = (uname) => {
         setHideChat(false);
         //toast username
-        console.log('activated openChatHandler in App.js with name: ' + username)
-        sendToast(username);
-        setUsername(username);
+        console.log('activated openChatHandler in App.js with name: ' + uname)
+        sendToast(uname);
+        setUsername(uname);
     }
 
 
@@ -47,16 +46,16 @@ function App() {
     // return (
     //     <div className="App">
     //         <Header />
-    //         <Welcome usernameSubmitHandler={ openChatHandler } hidden={ !hideChat } />
-    //         <Chat hidden={ hideChat } />
+    //         <Welcome socket={ socket } usernameSubmitHandler={ openChatHandler } hidden={ false } />
+    //         <Chat username={ username } socket={ socket } hidden={ false } />
     //     </div>
     // );
     //testing
     return (
         <div className="App">
             <Header />
-            <Welcome socket={ socket } usernameSubmitHandler={ openChatHandler } hidden={ false } />
-            <Chat username={ username } socket={ socket } hidden={ false } />
+            <Welcome socket={ socket } usernameSubmitHandler={ openChatHandler } hidden={ !hideChat } />
+            <Chat username={ username } socket={ socket } hidden={ hideChat } />
         </div>
     );
 }

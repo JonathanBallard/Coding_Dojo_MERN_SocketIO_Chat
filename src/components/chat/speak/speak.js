@@ -14,13 +14,15 @@ const Speak = props => {
         console.log('message sending from speak: ' + messageToSend);
         props.socket.emit('outgoing_message', messageToSend, props.username);
         e.preventDefault();
+        const input = document.getElementById('inputBox');
+        input.value = '';
     }
     
     return (
         <div className='speak'>
             <h4>Enter Message:</h4>
             <form>
-                <input onChange= { updateMessageHandler } name='sendMsg' type='text' placeholder='My Message...' />
+                <input onChange= { updateMessageHandler } id='inputBox' name='sendMsg' type='text' placeholder='My Message...' />
                 <input className='submitBtn' onClick={ sendMessageHandler } type="submit" value="Send"/>
             </form>
 

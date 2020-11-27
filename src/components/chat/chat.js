@@ -27,7 +27,7 @@ const Chat = props => {
 
     return (
         <div className={ chatClasses }>
-            <h1>Chatting As: { username }</h1>
+            <h1>Chatting As: <span id="username">{ username }</span></h1>
             <Messages username={ props.username } socket={ props.socket } />
             <Speak username={ props.username } socket={ props.socket } />
         </div>

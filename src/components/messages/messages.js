@@ -23,10 +23,16 @@ const Messages = props => {
         // add logic to check if message is a toast or not
 
         if(type === 'message'){
-        setMessageArr([...messageArr, <Message socket={ props.socket } key={ messageArr.length } sender={ sender } timesent={ timeString } content={ msg } />])
+            console.log('messages, props.username: ' + props.username + ' , sender: ' + sender);
+            if(props.username !== sender){
+                setMessageArr([...messageArr, <Message socket={ props.socket } align='alignRight' key={ messageArr.length } sender={ sender } timesent={ timeString } content={ msg } />])
+            }
+            else {
+                setMessageArr([...messageArr, <Message socket={ props.socket } align='alignLeft' key={ messageArr.length } sender={ sender } timesent={ timeString } content={ msg } />])
+            }
         }
         else if(type === 'toast'){
-        setMessageArr([...messageArr, <Toast socket={ props.socket } key={ messageArr.length } sender={ sender } timesent={ timeString } content={ msg } />])
+            setMessageArr([...messageArr, <Toast socket={ props.socket } key={ messageArr.length } sender={ sender } timesent={ timeString } content={ msg } />])
         }
     };
     

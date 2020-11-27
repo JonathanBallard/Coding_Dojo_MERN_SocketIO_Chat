@@ -5,7 +5,6 @@ const Message = props => {
 
 
     if(props.align !== 'alignRight'){
-
         return (
             <div className="message alignLeft">
                 <p className="msgContent" >{ props.content }</p>

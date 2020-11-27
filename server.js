@@ -20,7 +20,7 @@ const io = require("socket.io")(server);
 //When the client sends data in, we send that data to all other clients
 io.on('connection', socket => {
     socket.emit("new_message_from_server", "pickles and kittens oh me oh my" , 'jonathan');
-    // socket.emit("new_message_from_server", "varios stuffs and things in my pie" , 'jonathan');
+    socket.emit("new_message_from_server", "varios stuffs and things in my pie" , 'jonathan');
     // socket.emit("new_message_from_server", "what kind of stuffs?" , 'excalibur');
 
     console.log('Nice to meet you: Socket ID:', socket.id, ' **handshake**');
@@ -28,14 +28,9 @@ io.on('connection', socket => {
 
     socket.on('toastOut', sender => {
         console.log('toastData: ' + sender)
-        // socket.emit("toast", 'has joined the chat!', sender);
+        socket.emit("toast", 'has joined the chat!', sender);
     });
 
-    // socket.on('toast', (data) => {
-    //     console.log("THIS IS THE TOAST TEST")
-    //     const userToast = 'Welcome new user: ' + data;
-    //     socket.emit("send_data_to_all_other_clients", userToast)
-    // })
     socket.on('outgoing_message', (msg, sender) => {
         console.log("THIS IS THE OUTGOING MESSAGE TEST")
         socket.emit("new_message_from_server", msg, sender);

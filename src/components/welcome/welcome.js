@@ -25,6 +25,8 @@ const Welcome = props => {
         
     }
     const sendUsername = (e) => {
+        const input = document.getElementById('inputName');
+        input.value = '';
         props.usernameSubmitHandler(username);
         e.preventDefault();
     }
@@ -34,7 +36,7 @@ const Welcome = props => {
             <h4>Get started right now!</h4>
             <h6>I want to start chatting with the name...</h6>
             <form action=''>
-                <input id='name' onChange={ setName } name="username" type="text" placeholder={ username } />
+                <input id='inputName' onChange={ setName } name="username" type="text" placeholder={ 'username' } />
                 <input onClick={ sendUsername } className="submitBtn" type="submit" value="Start Chatting"/>
             </form>
 
