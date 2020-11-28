@@ -13,28 +13,32 @@ const server = app.listen(port, () => {
 });
 
 const io = require("socket.io")(server);
+let messageArr = [];
 
 
 //On every client connection it logs the socket ID
 //Then emits 2 checks (which we haven't seen on our clients yet)
 //When the client sends data in, we send that data to all other clients
 io.on('connection', socket => {
-    socket.emit("new_message_from_server", "pickles and kittens oh me oh my" , 'jonathan');
-    socket.emit("new_message_from_server", "varios stuffs and things in my pie" , 'jonathan');
+    // socket.emit("new_message_from_server", "pickles and kittens oh me oh my" , 'jonathan');
+    // socket.emit("new_message_from_server", "varios stuffs and things in my pie" , 'jonathan');
     // socket.emit("new_message_from_server", "what kind of stuffs?" , 'excalibur');
 
     console.log('Nice to meet you: Socket ID:', socket.id, ' **handshake**');
-    socket.emit("Welcome", 'testing')
+    // socket.emit("Welcome", 'testing')
 
     socket.on('toastOut', sender => {
-        console.log('toastData: ' + sender)
-        socket.emit("toast", 'has joined the chat!', sender);
+        // console.log('toastData: ' + sender)
+        io.emit("toast", 'has joined the chat!', sender);
     });
 
     socket.on('outgoing_message', (msg, sender) => {
-        console.log("THIS IS THE OUTGOING MESSAGE TEST")
-        socket.emit("new_message_from_server", msg, sender);
+        // console.log("THIS IS THE OUTGOING MESSAGE TEST")
+        console.time('new_message_sent_from_server');
+        io.emit("new_message_from_server", msg, sender);
+        console.timeEnd('new_message_sent_from_server');
     })
+    
 
     socket.on("disconnect", () => {
         console.log('Client Disconnected');

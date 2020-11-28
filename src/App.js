@@ -15,6 +15,7 @@ function App() {
 
     useEffect(() => {
         setHideChat(true);
+        setUsername('');
 
         // we need to set up all of our event listeners
         // in the useEffect callback function
