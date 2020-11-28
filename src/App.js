@@ -38,20 +38,13 @@ function App() {
         setHideChat(false);
         //toast username
         console.log('activated openChatHandler in App.js with name: ' + uname)
-        sendToast(uname);
         setUsername(uname);
+        sendToast(uname);
     }
 
 
 
-    // return (
-    //     <div className="App">
-    //         <Header />
-    //         <Welcome socket={ socket } usernameSubmitHandler={ openChatHandler } hidden={ false } />
-    //         <Chat username={ username } socket={ socket } hidden={ false } />
-    //     </div>
-    // );
-    //testing
+
     return (
         <div className="App">
             <Header />

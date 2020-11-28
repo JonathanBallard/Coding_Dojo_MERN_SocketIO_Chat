@@ -13,7 +13,7 @@ const server = app.listen(port, () => {
 });
 
 const io = require("socket.io")(server);
-let messageArr = [];
+
 
 
 //On every client connection it logs the socket ID
@@ -28,15 +28,11 @@ io.on('connection', socket => {
     // socket.emit("Welcome", 'testing')
 
     socket.on('toastOut', sender => {
-        // console.log('toastData: ' + sender)
         io.emit("toast", 'has joined the chat!', sender);
     });
 
     socket.on('outgoing_message', (msg, sender) => {
-        // console.log("THIS IS THE OUTGOING MESSAGE TEST")
-        console.time('new_message_sent_from_server');
         io.emit("new_message_from_server", msg, sender);
-        console.timeEnd('new_message_sent_from_server');
     })
     
 

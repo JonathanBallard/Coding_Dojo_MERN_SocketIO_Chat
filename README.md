@@ -24,11 +24,13 @@
 - **DONE** Emit the 'messageToSend' from Speak.js
 - Fix username not being passed down through props properly
 - **DONE** Only 1 message being shown at a time currently
-- Check for new connections randomly (am getting repeated test messages)
+- **DONE** Check for new connections randomly (am getting repeated test messages)
 - Keep scrolled to bottom
 - Style it up buttercup
 - Increase the size of the message entry box
-- Swap messages array over to server
+- Work on performance issues, especially around setMessageArr
+- Swap messages array over to server (?)
+- If you log out of chat and re-enter, all your old messages should be shown as not you
 
 - **FLOWCHART**
 - User chooses username on client, sends username to server

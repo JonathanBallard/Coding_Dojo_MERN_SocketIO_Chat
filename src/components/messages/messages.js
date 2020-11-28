@@ -28,10 +28,10 @@ const Messages = props => {
             console.log('messages, props.username: ' + props.username + ' , sender: ' + sender);
 
             if(props.username !== sender){
-                newMsg = <Message socket={ props.socket } align='alignRight' index={ currentArrLength } key={ currentArrLength } sender={ sender } timesent={ timeString } content={ msg } />;
+                newMsg = <Message socket={ props.socket } align='alignLeft' index={ currentArrLength } key={ currentArrLength } sender={ sender } timesent={ timeString } content={ msg } />;
             }
             else {
-                newMsg = <Message socket={ props.socket } align='alignLeft' index={ currentArrLength } key={ currentArrLength } sender={ sender } timesent={ timeString } content={ msg } />;
+                newMsg = <Message socket={ props.socket } align='alignRight' index={ currentArrLength } key={ currentArrLength } sender={ sender } timesent={ timeString } content={ msg } />;
             }
 
         }
@@ -61,7 +61,7 @@ const Messages = props => {
     return (
         <div className='allMessages'>
             { messageArr }
-            <h5>{ messageArr.length }</h5>
+            {/* <h5> Messages: { messageArr.length }</h5> */}
         </div>
     )
 }
