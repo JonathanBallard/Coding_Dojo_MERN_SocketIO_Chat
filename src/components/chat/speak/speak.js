@@ -8,7 +8,6 @@ const Speak = props => {
     const updateMessageHandler = (e) => {
         setMessageToSend(e.target.value);
     }
-
     //add our messageToSend to go through io.emit or similar
     const sendMessageHandler = (e) => {
         // console.log('message sending from speak: ' + messageToSend);

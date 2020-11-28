@@ -20,19 +20,34 @@ const io = require("socket.io")(server);
 //Then emits 2 checks (which we haven't seen on our clients yet)
 //When the client sends data in, we send that data to all other clients
 io.on('connection', socket => {
-    // socket.emit("new_message_from_server", "pickles and kittens oh me oh my" , 'jonathan');
-    // socket.emit("new_message_from_server", "varios stuffs and things in my pie" , 'jonathan');
-    // socket.emit("new_message_from_server", "what kind of stuffs?" , 'excalibur');
+    let allMessages = [];
 
     console.log('Nice to meet you: Socket ID:', socket.id, ' **handshake**');
     // socket.emit("Welcome", 'testing')
 
-    socket.on('toastOut', sender => {
-        io.emit("toast", 'has joined the chat!', sender);
+    socket.on('toastOut', (sender) => {
+        const d = new Date();
+        const currHours = d.getHours();
+        const currMinutes = d.getMinutes();
+        const currSeconds = d.getSeconds();
+        const timeString = '' + currHours + ':' + currMinutes + ':' + currSeconds; 
+
+        socket.broadcast.emit("toast", 'has joined the chat!', sender, timeString);
+        socket.emit("toastMe", 'have joined the chat!', 'You', timeString);
+        //send out all previous messages here
+        socket.emit('prev_messages', allMessages);
+        allMessages.push({ type: 'toast', msg: 'has joined the chat!', sender: sender, date: timeString });
     });
 
     socket.on('outgoing_message', (msg, sender) => {
-        io.emit("new_message_from_server", msg, sender);
+        const d = new Date();
+        const currHours = d.getHours();
+        const currMinutes = d.getMinutes();
+        const currSeconds = d.getSeconds();
+        const timeString = '' + currHours + ':' + currMinutes + ':' + currSeconds; 
+
+        allMessages.push({ type: 'message', msg: msg, sender: sender, date:timeString });
+        io.emit("new_message_from_server", msg, sender, timeString);
     })
     
 
