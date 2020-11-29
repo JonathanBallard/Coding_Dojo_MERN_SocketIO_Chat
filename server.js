@@ -21,6 +21,9 @@ const io = require("socket.io")(server);
 //When the client sends data in, we send that data to all other clients
 io.on('connection', socket => {
     let allMessages = [];
+    let rudeWords = ['fuck']; //eventually attach an array of inappropriate words here incl. swear words and suchlike
+    let reservedNames = ['Jonathan', 'jonathan', 'Admin', 'admin', 'You', 'you', 'Moderator', 'moderator', 'Room', 'room', 'Test', 'test'];
+    let allUsernames = [...reservedNames];
 
     console.log('Nice to meet you: Socket ID:', socket.id, ' **handshake**');
     // socket.emit("Welcome", 'testing')
@@ -30,7 +33,29 @@ io.on('connection', socket => {
         const currHours = d.getHours();
         const currMinutes = d.getMinutes();
         const currSeconds = d.getSeconds();
-        const timeString = '' + currHours + ':' + currMinutes + ':' + currSeconds; 
+        const timeString = '' + currHours + ':' + currMinutes + ':' + currSeconds;
+
+        // do logic to determine if username is valid, if NOT valid then return client to welcome screen with warning message
+
+        //check rudeWords
+        if(rudeWords.includes(sender)){
+            // return user to Welcome screen for new name with a warning
+        }
+
+        //check reserved names
+        else if(reservedNames.includes(sender)){
+            // return user to Welcome screen for new name with a warning
+        }
+
+        //check usernames currently in use
+        else if(allUsernames.includes(sender)){
+            // return user to Welcome screen for new name with a warning
+        }
+        else {
+            //if all checks pass then toast
+        }
+
+
 
         socket.broadcast.emit("toast", 'has joined the chat!', sender, timeString);
         socket.emit("toastMe", 'have joined the chat!', 'You', timeString);
