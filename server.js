@@ -15,6 +15,8 @@ const server = app.listen(port, () => {
 const io = require("socket.io")(server);
 
 
+let allUsernames = [];
+var allSockets = [];
 
 //On every client connection it logs the socket ID
 //Then emits 2 checks (which we haven't seen on our clients yet)
@@ -23,7 +25,12 @@ io.on('connection', socket => {
     let allMessages = [];
     let rudeWords = ['fuck']; //eventually attach an array of inappropriate words here incl. swear words and suchlike
     let reservedNames = ['Jonathan', 'jonathan', 'Admin', 'admin', 'You', 'you', 'Moderator', 'moderator', 'Room', 'room', 'Test', 'test'];
-    let allUsernames = [...reservedNames];
+    class socketName {
+        constructor(id, name){
+            this.socketID = id;
+            this.name = name;
+        }
+    };
 
     console.log('Nice to meet you: Socket ID:', socket.id, ' **handshake**');
     // socket.emit("Welcome", 'testing')
@@ -40,28 +47,36 @@ io.on('connection', socket => {
         //check rudeWords
         if(rudeWords.includes(sender)){
             // return user to Welcome screen for new name with a warning
+            socket.emit('toastFail', sender, 'is an inappropriate name, please be respectful');
         }
 
         //check reserved names
         else if(reservedNames.includes(sender)){
             // return user to Welcome screen for new name with a warning
+            socket.emit('toastFail', sender, 'is a reserved name, please enter a new name');
         }
 
         //check usernames currently in use
         else if(allUsernames.includes(sender)){
             // return user to Welcome screen for new name with a warning
+            socket.emit('toastFail', sender, 'is already in use, please enter a new name')
         }
         else {
             //if all checks pass then toast
+            allUsernames.push(sender);
+            let newSocket = new socketName(socket.id, sender);
+            // console.log('sender:::' + newSocket.socketID)
+            allSockets.push(newSocket)
+            socket.emit('toastSuccess', sender);
+            socket.broadcast.emit("toast", 'has joined the chat!', sender, timeString);
+            socket.emit("toastMe", 'have joined the chat!', 'You', timeString);
+            //send out all previous messages here
+            socket.emit('prev_messages', allMessages);
+            allMessages.push({ type: 'toast', msg: 'has joined the chat!', sender: sender, date: timeString });
         }
 
 
 
-        socket.broadcast.emit("toast", 'has joined the chat!', sender, timeString);
-        socket.emit("toastMe", 'have joined the chat!', 'You', timeString);
-        //send out all previous messages here
-        socket.emit('prev_messages', allMessages);
-        allMessages.push({ type: 'toast', msg: 'has joined the chat!', sender: sender, date: timeString });
     });
 
     socket.on('outgoing_message', (msg, sender) => {
@@ -76,9 +91,41 @@ io.on('connection', socket => {
     })
     
 
-    socket.on("disconnect", () => {
+    socket.on("freeUpName", () => {
+        console.log('allSockets length ' + allSockets.length)
+        const id = socket.id;
+        var sender = '';
+        
+        for(let i in allSockets){
+            console.log('id ' + id);
+            console.log('i ' + i);
+            console.log('bool ' + (allSockets[i].socketID == i));
+            console.log('allSockets i .socketID ' + allSockets[i].socketID);
+            if(allSockets[i].socketID == id){
+                sender = allSockets[i].name;
+                console.log('sender11 ' + sender);
+                console.log('allSockets i .name ' + allSockets[i].name);
+                console.log('allSockets i .name ' + allSockets[i].name);
+            }
+        }
+        console.log('sender: ' + sender);
+        //delete username so it's freed back up for use
+        for(let i in allUsernames){
+            console.log('sender index? ' + allUsernames[i]);
+            if(allUsernames[i] === sender){
+                allUsernames.splice(i);
+                console.log('after splicing: ' + allUsernames);
+            }
+        }
+        console.log('allUsernames: ' + allUsernames );
         console.log('Client Disconnected');
+        // socket.emit('disconnect');
+        console.log('AFTER DISCONNECT - allUsernames: ' + allUsernames );
     })
+
+    socket.on('disconnect', () => {
+        socket.disconnect(true);
+    });
 
 });
 

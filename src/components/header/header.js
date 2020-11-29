@@ -5,7 +5,7 @@ const Header = props => {
 
 
     return (
-        <div className='header'>MERN Chat</div>
+        <div className='header'>--- MERN Chat ---</div>
     )
 }
 

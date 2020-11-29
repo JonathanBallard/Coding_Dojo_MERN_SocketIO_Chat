@@ -8,16 +8,24 @@ const Welcome = props => {
 
     const [ welcomeStyling, setWelcomeStyling ] = useState("");
 
-
+    const [ warningClasses, setWarningClasses ] = useState('');
 
     useEffect(() => {
+
+        if(props.warning.length){
+            setWarningClasses('warning');
+        }
+        else{
+            setWarningClasses('warning hidden');
+        }
+        
         if(props.hidden){
             setWelcomeStyling('welcome hidden');
         }
         else {
             setWelcomeStyling('welcome');
         }
-    }, [props.hidden])
+    }, [props.hidden, props.warning])
 
     const setName = (e) => {
         setUsername(e.target.value);
@@ -34,6 +42,7 @@ const Welcome = props => {
     return (
         <div className={welcomeStyling}>
             <h4>Get started right now!</h4>
+            <h3 className={ warningClasses }>I'm sorry, <span className="username">"{ props.username }"</span> { props.warning }</h3>
             <h6>I want to start chatting with the name...</h6>
             <form action=''>
                 <input id='inputName' onChange={ setName } name="username" type="text" placeholder={ 'username' } />

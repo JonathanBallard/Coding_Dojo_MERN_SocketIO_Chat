@@ -34,6 +34,8 @@
 - Increase the size of the message entry box
 - Work on performance issues, especially around setMessageArr
 - If you log out of chat and re-enter, all your old messages should be shown as not you
+- Restyle header
+- Add logout button
 
 - **FLOWCHART**
 - User chooses username on client, sends username to server

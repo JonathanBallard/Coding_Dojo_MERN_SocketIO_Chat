@@ -12,10 +12,10 @@ function App() {
     const [ socket ] = useState(() => io(':8000'));
     const [ hideChat, setHideChat ] = useState();
     const [ username, setUsername ] = useState();
+    const [ warning, setWarning ] = useState('');
 
     useEffect(() => {
         setHideChat(true);
-        setUsername('');
 
         // we need to set up all of our event listeners
         // in the useEffect callback function
@@ -25,8 +25,21 @@ function App() {
         // note that we're returning a callback function
         // this ensures that the underlying socket will be closed if App is unmounted
         // this would be more critical if we were creating the socket in a subcomponent
-        // return () => socket.disconnect(true);
         // setUsername(username);
+        
+        socket.on('toastFail', (name, msg) => {
+            setHideChat(true);
+            setWarning(msg);
+            setUsername(name);
+        });
+        
+        socket.on('toastSuccess', (name) => {
+            setHideChat(false);
+            setUsername(name);
+        })
+        console.log('username sent to free up: ' + username);
+        return socket.emit('freeUpName', username);
+
     }, []);
 
     const sendToast = (name) => {
@@ -35,7 +48,6 @@ function App() {
     }
 
     const openChatHandler = (uname) => {
-        setHideChat(false);
         //toast username
         console.log('activated openChatHandler in App.js with name: ' + uname)
         setUsername(uname);
@@ -48,7 +60,7 @@ function App() {
     return (
         <div className="App">
             <Header />
-            <Welcome socket={ socket } usernameSubmitHandler={ openChatHandler } hidden={ !hideChat } />
+            <Welcome username={ username } warning={ warning } socket={ socket } usernameSubmitHandler={ openChatHandler } hidden={ !hideChat } />
             <Chat username={ username } socket={ socket } hidden={ hideChat } />
         </div>
     );
