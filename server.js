@@ -14,9 +14,15 @@ const server = app.listen(port, () => {
 
 const io = require("socket.io")(server);
 
+class socketName {
+    constructor(id, name){
+        this.socketID = id;
+        this.name = name;
+    }
+};
 
 let allUsernames = [];
-var allSockets = [];
+let allSockets = [];
 
 //On every client connection it logs the socket ID
 //Then emits 2 checks (which we haven't seen on our clients yet)
@@ -25,12 +31,7 @@ io.on('connection', socket => {
     let allMessages = [];
     let rudeWords = ['fuck']; //eventually attach an array of inappropriate words here incl. swear words and suchlike
     let reservedNames = ['Jonathan', 'jonathan', 'Admin', 'admin', 'You', 'you', 'Moderator', 'moderator', 'Room', 'room', 'Test', 'test'];
-    class socketName {
-        constructor(id, name){
-            this.socketID = id;
-            this.name = name;
-        }
-    };
+
 
     console.log('Nice to meet you: Socket ID:', socket.id, ' **handshake**');
     // socket.emit("Welcome", 'testing')
@@ -97,27 +98,23 @@ io.on('connection', socket => {
         var sender = '';
         
         for(let i in allSockets){
-            console.log('id ' + id);
-            console.log('i ' + i);
-            console.log('bool ' + (allSockets[i].socketID == i));
-            console.log('allSockets i .socketID ' + allSockets[i].socketID);
-            if(allSockets[i].socketID == id){
+            if(allSockets[i].socketID === id){
                 sender = allSockets[i].name;
-                console.log('sender11 ' + sender);
-                console.log('allSockets i .name ' + allSockets[i].name);
-                console.log('allSockets i .name ' + allSockets[i].name);
             }
         }
         console.log('sender: ' + sender);
+        console.log('allUsernames: ' + allUsernames );
         //delete username so it's freed back up for use
         for(let i in allUsernames){
             console.log('sender index? ' + allUsernames[i]);
             if(allUsernames[i] === sender){
                 allUsernames.splice(i);
-                console.log('after splicing: ' + allUsernames);
+            }
+            else if(allUsernames.length === 1){
+                allUsernames.splice(0);
             }
         }
-        console.log('allUsernames: ' + allUsernames );
+        
         console.log('Client Disconnected');
         // socket.emit('disconnect');
         console.log('AFTER DISCONNECT - allUsernames: ' + allUsernames );
