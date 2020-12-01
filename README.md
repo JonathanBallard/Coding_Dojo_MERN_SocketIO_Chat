@@ -27,14 +27,14 @@
 - **DONE** Don't store components in state
 - **DONE** When opening up chat, see all old messages from others
 - **DONE** Date/Time currently changes to match current time whenever a new message is sent
+- **DONE** Restyle header
+- **DONE** Increase the size of the message entry box
 - Change messages background color based on user?
 - Organize messages by time sent
 - Keep scrolled to bottom
 - Style it up buttercup
-- Increase the size of the message entry box
 - Work on performance issues, especially around setMessageArr
 - If you log out of chat and re-enter, all your old messages should be shown as not you
-- Restyle header
 - Add logout button
 
 - **FLOWCHART**

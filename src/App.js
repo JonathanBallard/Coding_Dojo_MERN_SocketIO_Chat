@@ -37,14 +37,15 @@ function App() {
             setHideChat(false);
             setUsername(name);
         })
-        console.log('username sent to free up: ' + username);
-        return socket.emit('freeUpName', username);
+        console.log('username sent to free up: ' + socket.id);
 
+        socket.emit('freeUpName', socket.id);
+        // return socket.disconnect(true);
     }, []);
 
     const sendToast = (name) => {
         //emit name for the server to toast
-        socket.emit('toastOut', name);
+        socket.emit('toastOut', name, socket.id);
     }
 
     const openChatHandler = (uname) => {

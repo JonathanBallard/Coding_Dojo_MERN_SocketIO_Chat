@@ -36,7 +36,7 @@ io.on('connection', socket => {
     console.log('Nice to meet you: Socket ID:', socket.id, ' **handshake**');
     // socket.emit("Welcome", 'testing')
 
-    socket.on('toastOut', (sender) => {
+    socket.on('toastOut', (sender, socketId) => {
         const d = new Date();
         const currHours = d.getHours();
         const currMinutes = d.getMinutes();
@@ -65,9 +65,15 @@ io.on('connection', socket => {
         else {
             //if all checks pass then toast
             allUsernames.push(sender);
-            let newSocket = new socketName(socket.id, sender);
+            let newSocket = new socketName(socketId, sender);
             // console.log('sender:::' + newSocket.socketID)
             allSockets.push(newSocket)
+            for(let i in allSockets){
+                console.log('-------------------');
+                console.log('index: ' + i);
+                console.log(allSockets[i]);
+                console.log('-------------------');
+            }
             socket.emit('toastSuccess', sender);
             socket.broadcast.emit("toast", 'has joined the chat!', sender, timeString);
             socket.emit("toastMe", 'have joined the chat!', 'You', timeString);
@@ -92,9 +98,9 @@ io.on('connection', socket => {
     })
     
 
-    socket.on("freeUpName", () => {
+    socket.on("freeUpName", (incId) => {
         console.log('allSockets length ' + allSockets.length)
-        const id = socket.id;
+        const id = incId;
         var sender = '';
         
         for(let i in allSockets){
