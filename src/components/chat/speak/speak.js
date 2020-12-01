@@ -16,6 +16,11 @@ const Speak = props => {
         const input = document.getElementById('inputBox');
         input.value = '';
     }
+
+    const logoutHandler = e => {
+        e.preventDefault();
+        props.socket.emit('logout', props.username);
+    }
     
     return (
         <div className='speak'>
@@ -23,6 +28,10 @@ const Speak = props => {
             <form>
                 <input onChange= { updateMessageHandler } id='inputBox' name='sendMsg' type='text' placeholder='My Message...' />
                 <input className='submitBtn' onClick={ sendMessageHandler } type="submit" value="Send"/>
+            </form>
+
+            <form>
+                <input onClick={ logoutHandler } type='submit' value='LOGOUT' className='logoutBtn' />
             </form>
 
         </div>

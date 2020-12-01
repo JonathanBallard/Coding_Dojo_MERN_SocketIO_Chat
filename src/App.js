@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import io from 'socket.io-client';
 import './App.css';
 import Chat from './components/chat/chat';
@@ -11,8 +11,10 @@ function App() {
 
     const [ socket ] = useState(() => io(':8000'));
     const [ hideChat, setHideChat ] = useState();
-    const [ username, setUsername ] = useState();
+    // const [ username, setUsername ] = useState('');
     const [ warning, setWarning ] = useState('');
+
+    let nameIn = useRef(null);
 
     useEffect(() => {
         setHideChat(true);
@@ -26,32 +28,41 @@ function App() {
         // this ensures that the underlying socket will be closed if App is unmounted
         // this would be more critical if we were creating the socket in a subcomponent
         // setUsername(username);
+
         
         socket.on('toastFail', (name, msg) => {
+
             setHideChat(true);
             setWarning(msg);
-            setUsername(name);
+            // setUsername(name);
+            nameIn.current = name;
         });
         
         socket.on('toastSuccess', (name) => {
             setHideChat(false);
-            setUsername(name);
-        })
-        console.log('username sent to free up: ' + socket.id);
+            // setUsername(name);
+            nameIn.current = name;
+        });
 
-        socket.emit('freeUpName', socket.id);
-        // return socket.disconnect(true);
+        socket.on('loggedOut', () => {
+            setHideChat(true);
+        });
+
+        return socket.emit('freeUpName', nameIn.current);
+
+
     }, []);
 
     const sendToast = (name) => {
         //emit name for the server to toast
-        socket.emit('toastOut', name, socket.id);
+        socket.emit('toastOut', { sender: name });
     }
 
     const openChatHandler = (uname) => {
         //toast username
-        console.log('activated openChatHandler in App.js with name: ' + uname)
-        setUsername(uname);
+        nameIn.current = uname;
+        console.log('activated openChatHandler in App.js with name: ' + nameIn.current)
+        socket.emit('logClientData', 'App.js:62', nameIn.current);
         sendToast(uname);
     }
 
@@ -61,8 +72,8 @@ function App() {
     return (
         <div className="App">
             <Header />
-            <Welcome username={ username } warning={ warning } socket={ socket } usernameSubmitHandler={ openChatHandler } hidden={ !hideChat } />
-            <Chat username={ username } socket={ socket } hidden={ hideChat } />
+            <Welcome username={ nameIn.current } warning={ warning } socket={ socket } usernameSubmitHandler={ openChatHandler } hidden={ !hideChat } />
+            <Chat username={ nameIn.current } socket={ socket } hidden={ hideChat } />
         </div>
     );
 }

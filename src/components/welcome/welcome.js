@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './welcome.css';
 
 
@@ -9,6 +9,8 @@ const Welcome = props => {
     const [ welcomeStyling, setWelcomeStyling ] = useState("");
 
     const [ warningClasses, setWarningClasses ] = useState('');
+
+    let nameOut = useRef(null);
 
     useEffect(() => {
 
@@ -29,13 +31,14 @@ const Welcome = props => {
 
     const setName = (e) => {
         setUsername(e.target.value);
+        nameOut.current = e.target.value;
         console.log('welcome setUsername: ' + username);
         
     }
     const sendUsername = (e) => {
         const input = document.getElementById('inputName');
         input.value = '';
-        props.usernameSubmitHandler(username);
+        props.usernameSubmitHandler(nameOut.current);
         e.preventDefault();
     }
 

@@ -29,13 +29,14 @@
 - **DONE** Date/Time currently changes to match current time whenever a new message is sent
 - **DONE** Restyle header
 - **DONE** Increase the size of the message entry box
+- **DONE** Add logout button
+- **DONE** Fix Logout Button (splice function)
 - Change messages background color based on user?
 - Organize messages by time sent
 - Keep scrolled to bottom
 - Style it up buttercup
 - Work on performance issues, especially around setMessageArr
 - If you log out of chat and re-enter, all your old messages should be shown as not you
-- Add logout button
 
 - **FLOWCHART**
 - User chooses username on client, sends username to server
