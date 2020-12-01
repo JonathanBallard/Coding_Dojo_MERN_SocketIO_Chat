@@ -6,8 +6,8 @@
 - **DONE** Upon user joining chat page, broadcast a message to all other users
 - **DONE** Allow users to send chat messages
 - **DONE** Upon joining chat room, new user should be able to see previous messages (bonus)
-- Ensure there are no duplicate usernames (optional)
-- Ensure the newest message is always on screen: keep chat messages scrolled to bottom (bonus)
+- **DONE** Ensure there are no duplicate usernames (optional)
+- **DONE** Ensure the newest message is always on screen: keep chat messages scrolled to bottom (bonus)
 - Create different chat rooms that users can join where they only interact with others in their room (bonus)
 
 - **DONE** Hide messages until name chosen
@@ -31,12 +31,13 @@
 - **DONE** Increase the size of the message entry box
 - **DONE** Add logout button
 - **DONE** Fix Logout Button (splice function)
-- Change messages background color based on user?
-- Organize messages by time sent
-- Keep scrolled to bottom
-- Style it up buttercup
+- **DONE** Keep scrolled to bottom
+- **DONE** Style it up buttercup
+- **DONE** Organize messages by time sent
 - Work on performance issues, especially around setMessageArr
 - If you log out of chat and re-enter, all your old messages should be shown as not you
+- Change messages background color based on user?
+- Fix showing previous messages when you login to chat while having NOT been on chat site login page
 
 - **FLOWCHART**
 - User chooses username on client, sends username to server

@@ -5,16 +5,20 @@ const Toast = (props) => {
 
     if(props.user){
         return (
-            <div className="toast">
-                <p className='toastBody'><span className='me'>{ props.sender }</span> { props.content } at { props.timesent }</p>
-            </div>
+            <li className="chatItem">
+                <div className='toast'>
+                    <p className='toastBody'><span className='me'>{ props.sender }</span> { props.content } at { props.timesent }</p>
+                </div>
+            </li>
         )
     }
     else{
         return (
-            <div className="toast">
-                <p className='toastBody'><span className='sender'>{ props.sender }</span> { props.content } at { props.timesent }</p>
-            </div>
+            <li className="chatItem">
+                <div className='toast'>
+                    <p className='toastBody'><span className='sender'>{ props.sender }</span> { props.content } at { props.timesent }</p>
+                </div>
+            </li>
         )
     }
 }

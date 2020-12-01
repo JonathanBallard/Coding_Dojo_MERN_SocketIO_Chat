@@ -9,7 +9,7 @@ app.use( express.urlencoded({ extended: true }) );
 
 //initializes express server to listen on port 8000 and send a message as soon as the server is ready
 const server = app.listen(port, () => {
-    console.log('The Server is all fired up on port 8000')
+    console.log('The Server is all fired up on port 8000');
 });
 
 const io = require("socket.io")(server);
@@ -22,19 +22,17 @@ class socketName {
 };
 
 let allUsernames = [];
+let allMessages = [];
 
 //On every client connection it logs the socket ID
 //Then emits 2 checks (which we haven't seen on our clients yet)
 //When the client sends data in, we send that data to all other clients
 io.on('connection', socket => {
     const socketId = socket.id;
-    let allMessages = [];
     let rudeWords = ['fuck']; //eventually attach an array of inappropriate words here incl. swear words and suchlike
     let reservedNames = ['Jonathan', 'jonathan', 'Admin', 'admin', 'You', 'you', 'Moderator', 'moderator', 'Room', 'room', 'Test', 'test'];
 
-
     console.log('Nice to meet you: Socket ID:', socket.id, ' **handshake**');
-    // socket.emit("Welcome", 'testing')
 
     socket.on('toastOut', (data) => {
         const d = new Date();
@@ -45,7 +43,6 @@ io.on('connection', socket => {
         
 
         // do logic to determine if username is valid, if NOT valid then return client to welcome screen with warning message
-
         //check rudeWords
         if(rudeWords.includes(data.sender)){
             // return user to Welcome screen for new name with a warning
@@ -67,9 +64,6 @@ io.on('connection', socket => {
         else {
             //if all checks pass then toast
             allUsernames.push(data.sender);
-            // let newSocket = new socketName(socketId, sender);
-            // console.log('sender:::' + newSocket.socketID)
-            // allSockets.push(newSocket)
 
             socket.emit('toastSuccess', data.sender);
 
@@ -122,9 +116,9 @@ io.on('connection', socket => {
         console.log('freeUpName has been called with name: ' + name);
         for(let i in allUsernames){
             // console.log('sender index? ' + allUsernames[i]);
-            console.log(i);
+            // console.log(i);
             // console.log(allUsernames[i] + name);
-            console.log(allUsernames[i] === name);
+            // console.log(allUsernames[i] === name);
             if(allUsernames[i] === name){
                 allUsernames.splice(i,1);
                 console.log('********************')

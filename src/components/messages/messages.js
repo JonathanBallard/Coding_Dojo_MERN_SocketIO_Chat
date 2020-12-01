@@ -14,8 +14,11 @@ const Messages = props => {
 
     const createMessage= (type, msg, sender, len, date) =>{
 
-        const timeString = date;
+        if(type !== 'toast' && type !== 'message' && type !== 'toastMe'){
+            return;
+        }
 
+        const timeString = date;
         const currentArrLength = len;
         
         // add in some logic checking if this message was sent by our user (to change background color)
@@ -49,6 +52,8 @@ const Messages = props => {
         let allMessages = []
 
         arr.forEach(msg => {
+            console.log('CREATING PREV. MESSAGE');
+            console.log(msg.message + ' ' + msg.sender);
             let incMsg = createMessage(msg.type, msg.message, msg.sender, allMessages.length, msg.date);
             allMessages.push(incMsg);
         });
@@ -60,11 +65,11 @@ const Messages = props => {
         props.socket.on('toast', (msg, sender, date) => {
             setMessageArr([...messageArr, {type: 'toast', message: msg, sender: sender, date: date}])
         });
-
+        
         props.socket.on('toastMe', (msg, sender, date) => {
             setMessageArr([...messageArr, {type: 'toastMe', message: msg, sender: sender, date: date}])
         });
-
+        
         props.socket.on('prev_messages', prevMessages => {
             let previous = updateMessages(prevMessages);
             setMessageArr([...previous, ...messageArr]);
@@ -74,13 +79,20 @@ const Messages = props => {
             setMessageArr([...messageArr, {type: 'message', message: msg, sender: sender, date: date}])
         });
 
+        //keep scrolled to bottom of chat
+        const chatBox = document.getElementById('chatBox'); 
+        var xH = chatBox.scrollHeight; 
+        chatBox.scrollTo(0, xH);
+
     });
     
     listOfMessages = updateMessages(messageArr);
 
     return (
-        <div className='allMessages'>
-            { listOfMessages }
+        <div id="chatBox" className='allMessages'>
+            <ul>
+                { listOfMessages }
+            </ul>
             {/* <h5> Messages: { messageArr.length }</h5> */}
         </div>
     )
