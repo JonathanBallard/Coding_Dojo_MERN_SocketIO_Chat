@@ -84,7 +84,7 @@ const Messages = props => {
         var xH = chatBox.scrollHeight; 
         chatBox.scrollTo(0, xH);
 
-    });
+    }, [ messageArr ]);
     
     listOfMessages = updateMessages(messageArr);
 

@@ -24,7 +24,6 @@ class socketName {
 let allSockets = [];
 let allUsernames = [];
 let allMessages = [];
-let ourNamesBySocket = [];
 
 //On every client connection it logs the socket ID
 //Then emits 2 checks (which we haven't seen on our clients yet)
@@ -46,35 +45,28 @@ io.on('connection', socket => {
         // do logic to determine if username is valid, if NOT valid then return client to welcome screen with warning message
         //check rudeWords
         if(rudeWords.includes(data.sender)){
-            // return user to Welcome screen for new name with a warning
             socket.emit('toastFail', data.sender, 'is an inappropriate name, please be respectful');
         }
 
         //check reserved names
         else if(reservedNames.includes(data.sender)){
-            // return user to Welcome screen for new name with a warning
             socket.emit('toastFail', data.sender, 'is a reserved name, please enter a new name');
         }
 
         //check usernames currently in use
         else if(allUsernames.includes(data.sender)){
-            // return user to Welcome screen for new name with a warning
             socket.emit('toastFail', data.sender, 'is already in use, please enter a new name')
         }
 
         else {
             //if all checks pass then toast
+
+            //add approved name to array of all names
             allUsernames.push(data.sender);
-            console.log('socket.id in toastOut: ' + socket.id);
-            console.log('data.sender in toastOut: ' + data.sender);
+            
             //add socket/name combo to allSockets
             const newSocket = new socketName(socket.id, data.sender);
-            
             allSockets.push(newSocket);
-            console.log('newSocket: ' + newSocket);
-            console.log('newSocket ID: ' + newSocket.id);
-            console.log('newSocket Name: ' + newSocket.name);
-            console.log('newSocket: ' + allSockets);
 
             socket.emit('toastSuccess', data.sender);
 
