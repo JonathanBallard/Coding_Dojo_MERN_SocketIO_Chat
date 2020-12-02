@@ -38,6 +38,10 @@
 - If you log out of chat and re-enter, all your old messages should be shown as not you
 - Change messages background color based on user?
 - Fix showing previous messages when you login to chat while having NOT been on chat site login page
+- Move LOGOUT button
+- Better styling on my submit buttons
+- Add color chooser on login screen (?)
+- Add change name button (?)
 
 - **FLOWCHART**
 - User chooses username on client, sends username to server

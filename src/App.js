@@ -5,16 +5,18 @@ import Chat from './components/chat/chat';
 import Welcome from './components/welcome/welcome';
 import Header from './components/header/header';
 
+
+
 function App() {
   // notice that we pass a callback function to initialize the socket
   // we don't need to destructure the 'setSocket' function since we won't be updating the socket state
 
+
     const [ hideChat, setHideChat ] = useState();
     const [ warning, setWarning ] = useState('');
-    const [ socket ] = useState(() => io(':8000'));
-    // const [ socket, setSocket ] = useState();
-    let nameIn = useRef(null);
+    const [ socket ] = useState(() => io.connect(':8000', {'sync disconnect on unload': true }));
 
+    let nameIn = useRef(null);
 
     // we need to set up all of our event listeners
     // in the useEffect callback function
@@ -22,6 +24,10 @@ function App() {
 
         setHideChat(true);
         // socket.on('Welcome', data => console.log(data));
+        socket.on('connect', () => {
+            console.log('socket.id');
+            console.log(socket.id);
+        })
         
         socket.on('toastFail', (name, msg) => {
             setHideChat(true);
@@ -36,12 +42,14 @@ function App() {
         
         socket.on('loggedOut', () => {
             setHideChat(true);
+            window.location.reload();
         });
         
         // note that we're returning a callback function
         // this ensures that the underlying socket will be closed if App is unmounted
         // this would be more critical if we were creating the socket in a subcomponent
         return socket.emit('freeUpName', nameIn.current);
+        // return socket.emit('logout', nameIn.current);
     }, []);
 
 

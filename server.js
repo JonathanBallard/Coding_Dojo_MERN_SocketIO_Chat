@@ -16,19 +16,21 @@ const io = require("socket.io")(server);
 
 class socketName {
     constructor(id, name){
-        this.socketID = id;
+        this.id = id;
         this.name = name;
     }
 };
 
+let allSockets = [];
 let allUsernames = [];
 let allMessages = [];
+let ourNamesBySocket = [];
 
 //On every client connection it logs the socket ID
 //Then emits 2 checks (which we haven't seen on our clients yet)
 //When the client sends data in, we send that data to all other clients
 io.on('connection', socket => {
-    const socketId = socket.id;
+    // const socketId = socket.id;
     let rudeWords = ['fuck']; //eventually attach an array of inappropriate words here incl. swear words and suchlike
     let reservedNames = ['Jonathan', 'jonathan', 'Admin', 'admin', 'You', 'you', 'Moderator', 'moderator', 'Room', 'room', 'Test', 'test'];
 
@@ -40,7 +42,6 @@ io.on('connection', socket => {
         const currMinutes = d.getMinutes();
         const currSeconds = d.getSeconds();
         const timeString = '' + currHours + ':' + currMinutes + ':' + currSeconds;
-        
 
         // do logic to determine if username is valid, if NOT valid then return client to welcome screen with warning message
         //check rudeWords
@@ -64,6 +65,16 @@ io.on('connection', socket => {
         else {
             //if all checks pass then toast
             allUsernames.push(data.sender);
+            console.log('socket.id in toastOut: ' + socket.id);
+            console.log('data.sender in toastOut: ' + data.sender);
+            //add socket/name combo to allSockets
+            const newSocket = new socketName(socket.id, data.sender);
+            
+            allSockets.push(newSocket);
+            console.log('newSocket: ' + newSocket);
+            console.log('newSocket ID: ' + newSocket.id);
+            console.log('newSocket Name: ' + newSocket.name);
+            console.log('newSocket: ' + allSockets);
 
             socket.emit('toastSuccess', data.sender);
 
@@ -96,43 +107,52 @@ io.on('connection', socket => {
     });
 
     socket.on("logout", (username) => {
-        console.log('logout request: ' + username);
-        freeUpName(username);
+        // console.log('logout request: ' + username);
+        const oldSocket = {...socket};
+        const oldSocketId = oldSocket.id;
+        freeUpName(username, oldSocketId);
         socket.emit('loggedOut');
         socket.disconnect(true);
-    })
+    });
+
+    socket.on("freeUpName", (name) => {
+        const oldSocket = {...socket};
+        const oldSocketId = oldSocket.id;
+        freeUpName(name, oldSocketId);
+    });
 
     socket.on('disconnecting', () => {
         return true;
-    })
+    });
     
-    socket.on('disconnect', () => {
-        console.log('Client Disconnected');
-        console.log('AFTER DISCONNECT - allUsernames: ' + allUsernames );
-    })
+    socket.on('disconnect', (data) => {
+        //find and remove name
+        console.log('FIRED DISCONNECT EVENT');
+    });
     
 
-    const freeUpName = (name) => {
-        console.log('freeUpName has been called with name: ' + name);
-        for(let i in allUsernames){
-            // console.log('sender index? ' + allUsernames[i]);
-            // console.log(i);
-            // console.log(allUsernames[i] + name);
-            // console.log(allUsernames[i] === name);
-            if(allUsernames[i] === name){
-                allUsernames.splice(i,1);
-                console.log('********************')
-                console.log('SUCCESSFULLY SPLICED')
-                console.log('********************')
-                console.log('remaining names: ' + allUsernames);
+
+
+    const freeUpName = (nameIn, socketToFreeId) => {
+        // Remove name from allUsernames by name
+        // for(let i in allUsernames){
+        //     if(allUsernames[i] === nameIn){
+        //         allUsernames.splice(i,1);
+        //     }
+        // }
+
+        // Remove name from allUsernames by socket.id
+        for(let t of allSockets){
+            if(t.id === socketToFreeId){
+                for(let q in allUsernames){
+                    if(allUsernames[q] === t.name){
+                        allUsernames.splice(q,1);
+                    }
+                }
             }
         }
-        
-    }
 
-    socket.on("freeUpName", (name) => {
-        freeUpName(name);
-    });
+    }
 
 });
 
