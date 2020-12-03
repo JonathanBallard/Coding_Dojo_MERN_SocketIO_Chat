@@ -83,15 +83,22 @@ io.on('connection', socket => {
     });
 
     socket.on('outgoing_message', (msg, sender) => {
-        const d = new Date();
-        const currHours = d.getHours();
-        const currMinutes = d.getMinutes();
-        const currSeconds = d.getSeconds();
-        const timeString = '' + currHours + ':' + currMinutes + ':' + currSeconds; 
 
-        allMessages.push({ type: 'message', message: msg, sender: sender, date:timeString });
-        // io.emit("new_message_from_server", msg, sender, timeString);
-        io.emit("all_messages_from_server", allMessages);
+        if(msg){
+            const d = new Date();
+            const currHours = d.getHours();
+            const currMinutes = d.getMinutes();
+            const currSeconds = d.getSeconds();
+            const timeString = '' + currHours + ':' + currMinutes + ':' + currSeconds; 
+            
+            allMessages.push({ type: 'message', message: msg, sender: sender, date:timeString });
+            // io.emit("new_message_from_server", msg, sender, timeString);
+            io.emit("all_messages_from_server", allMessages);
+            socket.emit('clear_server_message');
+        }
+        else {
+            socket.emit('failed_message', 'Your message did not meet our minimum length requirement!');
+        }
     });
 
     socket.on('logClientData', (origin, data) => {

@@ -6,8 +6,8 @@ import './messages.css'
 
 const Messages = props => {
 
-    const [messageArr, setMessageArr] = useState([]);
-    const [allMessages, setAllMessages] = useState([]);
+    const [ messageArr, setMessageArr ] = useState([]);
+    const [ allMessages, setAllMessages ] = useState([]);
 
     // const messageRef = useRef([]);
 
@@ -38,7 +38,7 @@ const Messages = props => {
 
         }
         else if(type === 'toast'){
-            if(sender === 'you'){
+            if(props.username === sender){
                 newMsg = <Toast user='true' socket={ props.socket } index={ currentArrLength } key={ currentArrLength } sender={ sender } timesent={ timeString } content={ msg } />;
             }
             else {

@@ -34,15 +34,21 @@
 - **DONE** Keep scrolled to bottom
 - **DONE** Style it up buttercup
 - **DONE** Organize messages by time sent
+- **DONE** Redo Autoscroll, Toast
+- **DONE** If you log out of chat and re-enter, all your old messages should be shown as not you
+- **DONE** Fix showing previous messages when you login to chat while having NOT been on chat site login page
+- **DONE** Better styling on my submit buttons
+- **DONE** Add length check to sent messages
+- **DONE** Users must have a name > 2 characters
+- **DONE** Fix Toasting yourself not showing up in 'user' color
 - Work on performance issues, especially around setMessageArr
-- If you log out of chat and re-enter, all your old messages should be shown as not you
-- Change messages background color based on user?
-- Fix showing previous messages when you login to chat while having NOT been on chat site login page
 - Move LOGOUT button
-- Better styling on my submit buttons
+- Usernames still not freeing up when user refreshes page
+
+- **OPTIONAL FUNCTIONALITY TO CONSIDER**
+- Change messages background color for each different user (?)
 - Add color chooser on login screen (?)
 - Add change name button (?)
-- Redo Autoscroll, Toast
 
 - **FLOWCHART**
 - User chooses username on client, sends username to server

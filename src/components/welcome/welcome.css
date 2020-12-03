@@ -30,8 +30,22 @@ h6 {
 
 .submitBtn {
     font-size: 14px;
+    font-weight: bold;
     border-radius: 5px;
     margin-left: 5px;
+    background-color: rgb(89, 214, 31);
+    border: 2px solid black;
+    color: black;
+}
+
+.submitBtn:hover {
+    background-color: rgb(54, 129, 20);
+    color: white;
+}
+
+.submitBtn:active {
+    background-color: rgb(149, 33, 153);
+    color: white;
 }
 
 .hidden {
