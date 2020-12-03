@@ -50,7 +50,7 @@ function App() {
         // this would be more critical if we were creating the socket in a subcomponent
         return socket.emit('freeUpName', nameIn.current);
         // return socket.emit('logout', nameIn.current);
-    }, []);
+    }, [socket]);
 
 
 

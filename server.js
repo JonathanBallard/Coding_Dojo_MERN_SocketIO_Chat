@@ -36,6 +36,7 @@ io.on('connection', socket => {
     console.log('Nice to meet you: Socket ID:', socket.id, ' **handshake**');
 
     socket.on('toastOut', (data) => {
+        
         const d = new Date();
         const currHours = d.getHours();
         const currMinutes = d.getMinutes();
@@ -70,12 +71,13 @@ io.on('connection', socket => {
 
             socket.emit('toastSuccess', data.sender);
 
-            socket.broadcast.emit("toast", 'has joined the chat!', data.sender, timeString);
-            socket.emit("toastMe", 'have joined the chat!', 'You', timeString);
+            // io.emit("toast", 'joined the chat!', data.sender, timeString);
+            // socket.emit("toastMe", 'joined the chat!', 'You', timeString);
             
-            //send out all previous messages here
-            socket.emit('prev_messages', allMessages);
-            allMessages.push({ type: 'toast', msg: 'has joined the chat!', sender: data.sender, date: timeString });
+            allMessages.push({ type: 'toast', message: 'joined the chat!', sender: data.sender, date: timeString });
+
+            
+            io.emit("all_messages_from_server", allMessages);
         }
 
     });
@@ -87,8 +89,9 @@ io.on('connection', socket => {
         const currSeconds = d.getSeconds();
         const timeString = '' + currHours + ':' + currMinutes + ':' + currSeconds; 
 
-        allMessages.push({ type: 'message', msg: msg, sender: sender, date:timeString });
-        io.emit("new_message_from_server", msg, sender, timeString);
+        allMessages.push({ type: 'message', message: msg, sender: sender, date:timeString });
+        // io.emit("new_message_from_server", msg, sender, timeString);
+        io.emit("all_messages_from_server", allMessages);
     });
 
     socket.on('logClientData', (origin, data) => {

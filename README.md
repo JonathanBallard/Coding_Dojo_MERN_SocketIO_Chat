@@ -42,6 +42,7 @@
 - Better styling on my submit buttons
 - Add color chooser on login screen (?)
 - Add change name button (?)
+- Redo Autoscroll, Toast
 
 - **FLOWCHART**
 - User chooses username on client, sends username to server
