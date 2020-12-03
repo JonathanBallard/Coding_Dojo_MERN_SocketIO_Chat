@@ -41,9 +41,9 @@
 - **DONE** Add length check to sent messages
 - **DONE** Users must have a name > 2 characters
 - **DONE** Fix Toasting yourself not showing up in 'user' color
+- **DONE** Usernames still not freeing up when user refreshes page
+- **DONE** Move LOGOUT button
 - Work on performance issues, especially around setMessageArr
-- Move LOGOUT button
-- Usernames still not freeing up when user refreshes page
 
 - **OPTIONAL FUNCTIONALITY TO CONSIDER**
 - Change messages background color for each different user (?)
@@ -54,7 +54,7 @@
 - User chooses username on client, sends username to server
 - Server toasts username
 - Client hides <Welcome> and shows <Chat>
-- User sends message through client and <Chat> to server
-- Server emits message
-- Client receives message from server through <Messages>, turns the message into a <Message>
-- Client renders <Messages>
+- User sends message data through client and <Speak> to server
+- Server adds message to list of all messages from all clients
+- Client receives array of all messages from server through <Messages>, turns the array of message metadata into a <Message> component
+- Client renders <Message> components in an array

@@ -129,6 +129,9 @@ io.on('connection', socket => {
     
     socket.on('disconnect', (data) => {
         //find and remove name
+        const oldSocket = {...socket};
+        const oldSocketId = oldSocket.id;
+        freeUpName('unusedName', oldSocketId);
         console.log('FIRED DISCONNECT EVENT');
     });
     

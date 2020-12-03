@@ -43,16 +43,5 @@
     height: 60px;
 }
 
-.logoutBtn {
-    margin-top: 15px;
-    padding: 10px;
-    font-weight: bolder;
-    font-size: 25px;
-    border: 2px solid gold;
-    border-radius: 15px;
-    background-color: darkred;
-    color: white;
-    width: 45%;
-    font-family: hack;
-}
+
 

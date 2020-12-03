@@ -29,10 +29,7 @@ const Speak = props => {
         e.preventDefault();
     }
 
-    const logoutHandler = e => {
-        e.preventDefault();
-        props.socket.emit('logout', props.username);
-    }
+
 
     
     return (
@@ -45,9 +42,7 @@ const Speak = props => {
                 <input className='submitBtn' onClick={ sendMessageHandler } type="submit" value="Send"/>
             </form>
 
-            <form>
-                <input onClick={ logoutHandler } type='submit' value='LOGOUT' className='logoutBtn' />
-            </form>
+
 
         </div>
     )

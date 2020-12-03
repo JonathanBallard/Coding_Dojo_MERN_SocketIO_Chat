@@ -12,17 +12,38 @@
     
 }
 
+.chatting {
+    display: inline-block;
+}
+
+.logoutForm {
+    float: right;
+}
+
 .hidden {
     display: none;
 }
 
-
 #username {
     color: gold;
     font-size: 26px;
+    
 }
 
-
+.logoutBtn {
+    display: inline-block;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 5px;
+    font-weight: bolder;
+    font-size: 14px;
+    border: 2px solid gold;
+    border-radius: 15px;
+    background-color: darkred;
+    color: white;
+    width: 75px;
+    font-family: hack;
+}
 
 
 
