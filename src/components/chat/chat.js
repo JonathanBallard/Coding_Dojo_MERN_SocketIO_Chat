@@ -7,15 +7,15 @@ import './chat.css'
 const Chat = props => {
     
 
-    const [chatClasses, setChatClasses] = useState('chat hidden');
+    const [chatClasses, setChatClasses] = useState('chat msgArea hidden');
     const [ username, setUsername ] = useState();
 
     useEffect(() =>{
         if(props.hidden !== true){
-            setChatClasses('chat');
+            setChatClasses('chat msgArea');
         }
         else {
-            setChatClasses('chat hidden')
+            setChatClasses('chat msgArea hidden')
         }
 
         if(props.username){

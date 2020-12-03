@@ -43,6 +43,7 @@
 - **DONE** Fix Toasting yourself not showing up in 'user' color
 - **DONE** Usernames still not freeing up when user refreshes page
 - **DONE** Move LOGOUT button
+- Fix scrollbar for full page should NOT be styled
 - Work on performance issues, especially around setMessageArr
 
 - **OPTIONAL FUNCTIONALITY TO CONSIDER**
