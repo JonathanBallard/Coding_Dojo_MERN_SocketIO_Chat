@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import './speak.css';
 
 const Speak = props => {
@@ -10,15 +10,20 @@ const Speak = props => {
     const updateMessageHandler = (e) => {
         setMessageToSend(e.target.value);
     }
+
+
+
     //add our messageToSend to go through io.emit or similar
     const sendMessageHandler = (e) => {
         // console.log('message sending from speak: ' + messageToSend);
 
         if(messageToSend){
+            // console.log('messageToSend')
             props.socket.emit('outgoing_message', messageToSend, props.username);
             const input = document.getElementById('inputBox');
             input.value = '';
             setMessageToSend('');
+            // hide message length warning
             serverMessage.current = <p className='serverMessage hidden'>Your message does not meet our minimum length requirement!</p>;
             setTimeToRender(!timeToRender);
         }

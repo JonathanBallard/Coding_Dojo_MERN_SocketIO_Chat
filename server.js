@@ -24,6 +24,9 @@ class socketName {
 let allSockets = [];
 let allUsernames = [];
 let allMessages = [];
+let numSockets = 0;
+
+
 
 //On every client connection it logs the socket ID
 //Then emits 2 checks (which we haven't seen on our clients yet)
@@ -34,7 +37,8 @@ io.on('connection', socket => {
     let reservedNames = ['Jonathan', 'jonathan', 'Admin', 'admin', 'You', 'you', 'Moderator', 'moderator', 'Room', 'room', 'Test', 'test'];
 
     console.log('Nice to meet you: Socket ID:', socket.id, ' **handshake**');
-
+    numSockets++;
+    console.log('number of clients connected: ' + numSockets);
     socket.on('toastOut', (data) => {
         
         const d = new Date();
@@ -93,6 +97,7 @@ io.on('connection', socket => {
             
             allMessages.push({ type: 'message', message: msg, sender: sender, date:timeString });
             // io.emit("new_message_from_server", msg, sender, timeString);
+            // console.log('NEW MESSAGE FROM SERVER: ' + msg + ' ' + sender + ' ' + timeString)
             io.emit("all_messages_from_server", allMessages);
             socket.emit('clear_server_message');
         }
@@ -133,6 +138,7 @@ io.on('connection', socket => {
         const oldSocketId = oldSocket.id;
         freeUpName('unusedName', oldSocketId);
         console.log('FIRED DISCONNECT EVENT');
+        console.log('number of clients connected after disconnect: ' + numSockets);
     });
     
 

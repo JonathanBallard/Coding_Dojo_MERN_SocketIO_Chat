@@ -43,8 +43,13 @@
 - **DONE** Fix Toasting yourself not showing up in 'user' color
 - **DONE** Usernames still not freeing up when user refreshes page
 - **DONE** Move LOGOUT button
+- **DONE** Figure out why a single message is sent from server but multiple are added by messages.js
+- **DONE** Work on performance issues, especially around setMessageArr
+- **DONE** Fix scrollbar not scrolling down again
 - Fix scrollbar for full page should NOT be styled
-- Work on performance issues, especially around setMessageArr
+- Message length warning comes up when user is typing
+- Username length warning comes up when user is typing
+- Set long messages to wrap
 
 - **OPTIONAL FUNCTIONALITY TO CONSIDER**
 - Change messages background color for each different user (?)

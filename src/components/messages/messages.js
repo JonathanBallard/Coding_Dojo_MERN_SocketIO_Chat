@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 import Message from "./message/message";
 import Toast from './toast/toast';
@@ -6,12 +6,19 @@ import './messages.css'
 
 const Messages = props => {
 
-    const [ messageArr, setMessageArr ] = useState([]);
+    // const [ messageArr, setMessageArr ] = useState([]);
     const [ allMessages, setAllMessages ] = useState([]);
+
+    const chatBox = document.getElementById('chatBox'); 
+    if(chatBox){
+        var xH = chatBox.scrollHeight; 
+        chatBox.scrollTo(0, xH);
+        chatBox.scrollBy(0,700);
+    }
 
     // const messageRef = useRef([]);
 
-    let listOfMessages = [];
+    let listOfMessages = useRef([]);
 
     const createMessage= (type, msg, sender, len, date) =>{
 
@@ -22,11 +29,11 @@ const Messages = props => {
         const timeString = date;
         const currentArrLength = len;
 
-        // add in some logic checking if this message was sent by our user (to change background color)
+        
 
         let newMsg = <Message socket={ props.socket } align='alignRight' index={ currentArrLength } key={ currentArrLength } sender={ sender } timesent={ timeString } content={ msg } />;
 
-        // add logic to check if message is a toast or not
+        // add logic to check if type is a toast or a message
         if(type === 'message'){
 
             if(props.username !== sender){
@@ -38,6 +45,7 @@ const Messages = props => {
 
         }
         else if(type === 'toast'){
+            // add in some logic checking if this message was sent by our user (to change background color)
             if(props.username === sender){
                 newMsg = <Toast user='true' socket={ props.socket } index={ currentArrLength } key={ currentArrLength } sender={ sender } timesent={ timeString } content={ msg } />;
             }
@@ -54,46 +62,45 @@ const Messages = props => {
     };
 
     const updateMessages = (arr) => {
-        let updatedMessages = []
+        let updatedMessages = [];
+        console.log('arr.length in updateMessages: ' +  arr.length)
         arr.forEach(msg => {
-            // console.log('CREATING PREV. MESSAGE');
-            // console.log(msg.message + ' ' + msg.sender);
-            let incMsg = createMessage(msg.type, msg.message, msg.sender, updatedMessages.length, msg.date);
+            console.log('CREATING MESSAGE: ' + msg.message + ' ' + msg.sender + ' ' + msg.date);
+            const incMsg = createMessage(msg.type, msg.message, msg.sender, updatedMessages.length, msg.date);
             updatedMessages.push(incMsg);
         });
+        
         return updatedMessages;
     }
 
+
     useEffect(() => {
-        //receive toasted name
-        props.socket.on('toast', (msg, sender, date) => {
-            // setMessageArr([...messageArr, {type: 'toast', message: msg, sender: sender, date: date}])
-            // setAllMessages([...allMessages, {type: 'toast', message: msg, sender: sender, date: date}])
-        });
-
-        props.socket.on('toastMe', (msg, sender, date) => {
-            // setMessageArr([...messageArr, {type: 'toastMe', message: msg, sender: sender, date: date}])
-            // setAllMessages([...allMessages, {type: 'toastMe', message: msg, sender: 'you', date: date}])
-        });
-
         props.socket.on('all_messages_from_server', (arr) => {
             setAllMessages([...arr]);
         })
 
         //keep scrolled to bottom of chat
-        const chatBox = document.getElementById('chatBox'); 
-        var xH = chatBox.scrollHeight; 
-        chatBox.scrollTo(0, xH);
+        // const chatBox = document.getElementById('chatBox');
+        // if(chatBox){
+        //     var xH = chatBox.scrollHeight; 
+        //     chatBox.scrollTo(0, xH);
+        // }
+    }, []);
 
-    }, [ allMessages, props.socket ]);
+    listOfMessages.current = updateMessages(allMessages);
 
-    // listOfMessages = updateMessages(messageArr);
-    listOfMessages = updateMessages(allMessages);
+    
+    
+    //keep scrolled to bottom of chat
+    
+
+    // listOfMessages.current = updateMessages(messageArr);
+    // listOfMessages.current = updateMessages(allMessages);
 
     return (
         <div id="chatBox" className='allMessages'>
             <ul>
-                { listOfMessages }
+                { listOfMessages.current }
             </ul>
             {/* <h5> Messages: { messageArr.length }</h5> */}
         </div>
