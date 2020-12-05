@@ -7,7 +7,7 @@ const Toast = (props) => {
         return (
             <li className="chatItem">
                 <div className='toast'>
-                    <p className='toastBody'><span className='me'>{ props.sender }</span> { props.content } at { props.timesent }</p>
+                    <p className='toastBody'><span className='me'>{ props.sender }</span> <span className='metadata'>{ props.content } at { props.timesent }</span></p>
                 </div>
             </li>
         )
@@ -16,7 +16,7 @@ const Toast = (props) => {
         return (
             <li className="chatItem">
                 <div className='toast'>
-                    <p className='toastBody'><span className='sender'>{ props.sender }</span> { props.content } at { props.timesent }</p>
+                    <p className='toastBody'><span className='sender'>{ props.sender }</span> <span className='metadata'>{ props.content } at { props.timesent }</span></p>
                 </div>
             </li>
         )

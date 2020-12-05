@@ -46,10 +46,12 @@
 - **DONE** Figure out why a single message is sent from server but multiple are added by messages.js
 - **DONE** Work on performance issues, especially around setMessageArr
 - **DONE** Fix scrollbar not scrolling down again
-- Fix scrollbar for full page should NOT be styled
-- Message length warning comes up when user is typing
-- Username length warning comes up when user is typing
-- Set long messages to wrap
+- **DONE** Set long messages to wrap
+- **DONE** Restyle toasts to be bigger
+- **DONE** Username length warning comes up when user is typing
+
+- **CANCELLED** Fix scrollbar for full page should NOT be styled
+- **CANCELLED** Message length warning comes up when user is typing
 
 - **OPTIONAL FUNCTIONALITY TO CONSIDER**
 - Change messages background color for each different user (?)

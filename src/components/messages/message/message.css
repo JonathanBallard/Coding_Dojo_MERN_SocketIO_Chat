@@ -6,6 +6,8 @@
     margin-bottom: 0px;
     margin-top: 0px;
     padding-bottom: 0px;
+    overflow: auto;
+    word-wrap: break-word;
 }
 
 .msgMetadata {

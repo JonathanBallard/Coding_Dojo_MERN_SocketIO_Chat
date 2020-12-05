@@ -6,7 +6,7 @@
 }
 
 .toastBody {
-    font-size: 9px;
+    font-size: 11px;
     color: grey;
     padding-top: 0px;
     margin-top: 0px;
@@ -14,9 +14,9 @@
 
 .sender {
     background-color: darkblue;
-    border: 1px solid steelblue;
+    border: 2px solid steelblue;
     color: azure;
-    font-size: 11px;
+    font-size: 22px;
     font-weight: bold;
     padding-top: 0px;
     margin-top: 0px;
@@ -26,16 +26,20 @@
 
 .me {
     background-color: azure;
-    border: 1px solid steelblue;
-    color: darkblue;
-    font-size: 11px;
+    border: 3px double gold;
+    color: midnightblue;
+    font-size: 22px;
     font-weight: bold;
     padding-top: 0px;
     margin-top: 0px;
     padding: 5px;
+
 }
 
 .chatItem {
     list-style: none;
 }
 
+.metadata {
+    margin-left: 5px;
+}

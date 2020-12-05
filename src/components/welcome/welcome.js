@@ -35,8 +35,14 @@ const Welcome = props => {
 
     const setName = (e) => {
         setUsername(e.target.value);
-        nameOut.current = e.target.value;
-        console.log('welcome setUsername: ' + username);
+
+        if(e.target.value.length < 3){
+            serverMessage.current = <p className='serverMessage'>Your username does not meet our minimum length requirement!</p>;
+        }
+        else {
+            serverMessage.current = <p className='serverMessage hidden'>Your username does not meet our minimum length requirement!</p>;
+            nameOut.current = e.target.value;
+        }
         
     }
     const sendUsername = (e) => {
