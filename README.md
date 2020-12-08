@@ -1,5 +1,6 @@
 # SocketIO Chat Program with React client
 
+#### **INSTRUCTIONS**
 - **DONE** Create wireframes (welcome screen, chat screen)
 - **DONE** Create welcome screen
 - **DONE** Allow user to choose a screen name to be saved in state on welcome screen
@@ -10,6 +11,7 @@
 - **DONE** Ensure the newest message is always on screen: keep chat messages scrolled to bottom (bonus)
 - Create different chat rooms that users can join where they only interact with others in their room (bonus)
 
+#### **TODO**
 - **DONE** Hide messages until name chosen
 - **DONE** Hide My Name... entry once name is chosen
 - **DONE** Add styling to messages
@@ -53,12 +55,12 @@
 - **CANCELLED** Fix scrollbar for full page should NOT be styled
 - **CANCELLED** Message length warning comes up when user is typing
 
-- **OPTIONAL FUNCTIONALITY TO CONSIDER**
+#### **OPTIONAL FUNCTIONALITY TO CONSIDER**
 - Change messages background color for each different user (?)
 - Add color chooser on login screen (?)
 - Add change name button (?)
 
-- **FLOWCHART**
+#### **FLOWCHART**
 - User chooses username on client, sends username to server
 - Server toasts username
 - Client hides <Welcome> and shows <Chat>
